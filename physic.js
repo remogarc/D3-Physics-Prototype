@@ -35,12 +35,24 @@ class Physics extends Phaser.Scene {
 
     addPlayer(x, y, player) {
         this.player = this.physics.add.sprite(x, y, player);
+        this.player.setScale(0.5)
         this.player.setCollideWorldBounds(true);
         this.cursors = this.input.keyboard.createCursorKeys();
     }
 
+    addBlock(x, y, block) {
+        this.block = this.physics.add.image(x, y, block).setCollideWorldBounds().setInteractive();
+        this.block.setScale(3)
+        // this.block.setImmovable(true);
+        this.block.setPushable(true);
+    }
+
     update ()
     {
+        this.physics.collide(this.player, this.walls);
+        this.physics.add.collider(this.player, this.block);
+        this.physics.add.collider(this.block, this.walls);
+
         this.player.setVelocity(0);
         if (this.cursors.left.isDown){
             this.player.setVelocityX(-200);

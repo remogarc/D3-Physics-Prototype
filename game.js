@@ -7,6 +7,15 @@ class Demo1 extends Physics {
     }
     onEnter() {
         this.addPlayer(50, 50, 'player');
+
+        this.walls = this.physics.add.group({
+            immovable: true
+        });
+
+        this.wallTop = this.walls.create(800, 0, 'square').setOrigin(0);
+        this.wallTop.scaleY = 10;
+
+        this.addBlock(1000, 50, 'block');
     }
 }
 
