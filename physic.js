@@ -9,7 +9,7 @@ class Physics extends Phaser.Scene {
     }
 
     create() {
-        this.transitionDuration = 500;
+        this.transitionDuration = 200;
 
         this.w = this.game.config.width;
         this.h = this.game.config.height;
@@ -19,24 +19,24 @@ class Physics extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#001133');
         this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
 
-        this.add.text(this.w-3*this.s, this.h-3*this.s, "📺")
-            .setStyle({ fontSize: `${2 * this.s}px` })
-            .setInteractive({useHandCursor: true})
-            .on('pointerdown', () => {
+        this.add.text(this.w-16*this.s, this.h-4*this.s, "Full Screen press F")
+            .setStyle({ fontSize: `${1.3 * this.s}px` })
+        this.input.keyboard.on('keydown-F', () => {
                 if (this.scale.isFullscreen) {
                     this.scale.stopFullscreen();
                 } else {
                     this.scale.startFullscreen();
                 }
             });
+        this.add.text(this.w-17*this.s, this.h-2*this.s, "Continue press SPACE")
+        .setStyle({ fontSize: `${1.3 * this.s}px` })
 
         this.onEnter();
-
     }
 
     addPlayer(x, y, player) {
         this.player = this.physics.add.sprite(x, y, player);
-        this.player.setScale(0.3)
+        this.player.setScale(0.25)
         this.player.setCollideWorldBounds(true);
         this.cursors = this.input.keyboard.createCursorKeys();
     }
@@ -62,4 +62,10 @@ class Physics extends Phaser.Scene {
         }
     }
 
+    gotoScene(key) {
+        this.cameras.main.fade(this.transitionDuration, 0, 0, 0);
+        this.time.delayedCall(this.transitionDuration, () => {
+            this.scene.start(key);
+        });
+    }
 }
