@@ -14,6 +14,7 @@ class Physics extends Phaser.Scene {
         this.w = this.game.config.width;
         this.h = this.game.config.height;
         this.s = this.game.config.width * 0.01;
+        this.v = 500
 
         this.cameras.main.setBackgroundColor('#001133');
         this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
@@ -35,36 +36,29 @@ class Physics extends Phaser.Scene {
 
     addPlayer(x, y, player) {
         this.player = this.physics.add.sprite(x, y, player);
-        this.player.setScale(0.5)
+        this.player.setScale(0.3)
         this.player.setCollideWorldBounds(true);
         this.cursors = this.input.keyboard.createCursorKeys();
-    }
-
-    addBlock(x, y, block) {
-        this.block = this.physics.add.image(x, y, block).setCollideWorldBounds().setInteractive();
-        this.block.setScale(3)
-        // this.block.setImmovable(true);
-        this.block.setPushable(true);
     }
 
     update ()
     {
         this.physics.collide(this.player, this.walls);
-        this.physics.add.collider(this.player, this.block);
-        this.physics.add.collider(this.block, this.walls);
+        this.physics.collide(this.player, this.block);
+        this.physics.collide(this.block, this.walls);
 
         this.player.setVelocity(0);
         if (this.cursors.left.isDown){
-            this.player.setVelocityX(-200);
+            this.player.setVelocityX(-(this.v));
         }
         else if (this.cursors.right.isDown){
-            this.player.setVelocityX(200);
+            this.player.setVelocityX((this.v));
         }
         if (this.cursors.up.isDown){
-            this.player.setVelocityY(-200);
+            this.player.setVelocityY(-(this.v));
         }
         else if (this.cursors.down.isDown){
-            this.player.setVelocityY(200);
+            this.player.setVelocityY((this.v));
         }
     }
 
