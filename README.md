@@ -16,4 +16,4 @@ Code sources:
 - All files, game.js, physic.js, index.html were written by me, using some reference to [Pushable Body Debug 1](https://labs.phaser.io/view.html?src=src/physics/arcade/pushable%20body%20debug%201.js), [Collision Detection](https://labs.phaser.io/view.html?src=src/physics/arcade/collision%20direction.js), and [BigBodies](https://github.com/nathanaltice/BigBodies/blob/master/src/scenes/HoneySpider.js).
 
 Link to playable game:
-[Block Maze]()
+[Block Maze](https://remogarc.github.io/D3-Physics-Prototype/)
